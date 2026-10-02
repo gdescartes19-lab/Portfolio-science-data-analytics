@@ -1,0 +1,157 @@
+{
+  "index_size_kb": 578.0,
+  "original_size_kb": 4192.4,
+  "missing_anchor_targets": [],
+  "project_buttons": [
+    "p1",
+    "p2",
+    "p3"
+  ],
+  "project_files_exist": {
+    "p1": true,
+    "p2": true,
+    "p3": true
+  },
+  "main_image_count": 12,
+  "main_non_embedded_images": [],
+  "case_local_resource_refs": {
+    "p1": [],
+    "p2": [],
+    "p3": []
+  },
+  "js_checks": {
+    "index": [
+      {
+        "script": 1,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 2,
+        "ok": true,
+        "stderr": ""
+      }
+    ],
+    "p1": [
+      {
+        "script": 1,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 2,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 3,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 4,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 5,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 6,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 7,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 8,
+        "ok": true,
+        "stderr": ""
+      }
+    ],
+    "p2": [
+      {
+        "script": 1,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 2,
+        "ok": true,
+        "stderr": ""
+      }
+    ],
+    "p3": [
+      {
+        "script": 1,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 2,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 3,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 4,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 5,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 6,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 7,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 8,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 9,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 10,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 11,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 12,
+        "ok": true,
+        "stderr": ""
+      },
+      {
+        "script": 13,
+        "ok": true,
+        "stderr": ""
+      }
+    ]
+  }
+}

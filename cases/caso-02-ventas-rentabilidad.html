@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio de Análisis de Datos | Geiner Bejarano</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --code-bg: #0f172a;
+            --code-text: #e2e8f0;
+            --border-color: #e5e7eb;
+            --shadow-subtle: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --shadow-floating: 0 20px 35px -10px rgba(37, 99, 235, 0.12);
+        }
+
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            line-height: 1.7; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            color: var(--text-main); 
+            background-color: #f8fafc;
+        }
+
+        h1 { color: var(--text-main); font-size: 2.2rem; border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { color: var(--primary-color); font-size: 1.4rem; margin-top: 40px; }
+        
+        section { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-subtle); 
+            margin-bottom: 25px; 
+            border: 1px solid var(--border-color);
+        }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* Efecto flotante y suave para las tarjetas de código */
+        details { 
+            margin: 24px 0; 
+            border: 1px solid var(--border-color); 
+            border-radius: 14px; 
+            overflow: hidden; 
+            background: #ffffff;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        details:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        details[open] {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-floating);
+            border-color: #93c5fd;
+        }
+
+        summary { 
+            font-weight: 600; 
+            cursor: pointer; 
+            color: var(--text-main); 
+            padding: 16px 20px; 
+            background: #f8fafc; 
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            transition: background 0.25s ease, color 0.25s ease;
+        }
+
+        summary:hover { 
+            background: #f1f5f9; 
+            color: var(--primary-color);
+        }
+
+        /* Animación fluida de aparición para el contenido interno */
+        details[open] pre {
+            animation: fadeInContent 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contenedor del código con estética de terminal moderna */
+        pre { 
+            background: var(--code-bg); 
+            color: var(--code-text); 
+            padding: 20px; 
+            margin: 0; 
+            overflow-x: auto; 
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border-top: 1px solid #1e293b;
+        }
+
+        code { font-family: inherit; }
+    </style>
+
+<style>
+/* ===== Integración Power BI + Recomendaciones ===== */
+.dashboard-shell{
+    background:#0B2B48;
+    border-radius:18px;
+    padding:22px;
+    margin:28px 0;
+    box-shadow:0 18px 45px rgba(11,43,72,.18);
+}
+.dashboard-heading{
+    color:#fff;
+    margin:0 0 6px;
+    font-size:1.55rem;
+}
+.dashboard-subtitle{
+    color:#b9d8e4;
+    margin:0 0 18px;
+}
+.powerbi-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    min-height:520px;
+    background:#eef3f7;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:14px;
+    overflow:hidden;
+}
+.powerbi-frame iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+}
+.powerbi-placeholder{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    padding:35px;
+    text-align:center;
+    color:#0B2B48;
+    background:
+      linear-gradient(135deg,rgba(20,163,155,.10),rgba(45,127,249,.08)),
+      #f8fafc;
+}
+.powerbi-placeholder strong{font-size:1.25rem}
+.powerbi-placeholder code{
+    display:inline-block;
+    margin-top:10px;
+    padding:6px 9px;
+    border-radius:7px;
+    background:#0f172a;
+    color:#e2e8f0;
+}
+.rec-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:18px;
+}
+.rec-card{
+    border:1px solid #dbe5ec;
+    border-left:5px solid #14A39B;
+    background:#f8fbfc;
+    border-radius:12px;
+    padding:18px;
+}
+.rec-card h3{
+    margin:0 0 8px;
+    color:#0B2B48;
+    font-size:1.05rem;
+}
+.rec-card p{margin:0;color:#475467}
+.rec-card.accent{border-left-color:#F58F32}
+.rec-card.blue{border-left-color:#2D7FF9}
+.rec-card.purple{border-left-color:#7E57C2}
+@media (max-width:760px){
+    .rec-grid{grid-template-columns:1fr}
+    .powerbi-frame{min-height:420px}
+}
+</style>
+
+
+<style id="premium-redesign">
+:root{
+  --ink:#071827;
+  --navy:#0B2B48;
+  --navy-2:#123D5A;
+  --teal:#14A39B;
+  --blue:#2D7FF9;
+  --orange:#F58F32;
+  --violet:#7E57C2;
+  --paper:#F5F8FA;
+  --card:#FFFFFF;
+  --muted:#667085;
+  --line:#DDE6EC;
+  --soft:#EAF4F6;
+  --shadow:0 18px 55px rgba(7,24,39,.10);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0!important; max-width:none!important; padding:0!important;
+  font-family:Inter,"Segoe UI",system-ui,-apple-system,sans-serif!important;
+  color:var(--ink)!important;
+  background:
+    radial-gradient(circle at 90% 4%,rgba(20,163,155,.12),transparent 25rem),
+    radial-gradient(circle at 5% 20%,rgba(45,127,249,.08),transparent 24rem),
+    var(--paper)!important;
+  line-height:1.65!important;
+}
+body>h1, body>section{max-width:1180px;margin-left:auto!important;margin-right:auto!important}
+body>h1{
+  margin-top:0!important; max-width:none!important;
+  min-height:560px; padding:130px max(7vw,40px) 90px!important;
+  color:white!important; border:0!important; border-radius:0!important;
+  display:flex;align-items:flex-end;
+  font-size:clamp(2.6rem,6vw,5.8rem)!important; line-height:.98!important;
+  letter-spacing:-.055em; font-weight:800;
+  background:
+    linear-gradient(115deg,rgba(7,24,39,.97),rgba(11,43,72,.94) 55%,rgba(20,163,155,.76)),
+    radial-gradient(circle at 80% 30%,rgba(45,127,249,.45),transparent 32%);
+  position:relative; overflow:hidden;
+}
+body>h1:before{
+  content:"DATA ANALYTICS • CASO DE ESTUDIO";
+  position:absolute;top:62px;left:max(7vw,40px);
+  font-size:.78rem;letter-spacing:.22em;font-weight:800;color:#8EE5DE;
+}
+body>h1:after{
+  content:"Python  →  SQL Server  →  DAX  →  Power BI  →  Business Decisions";
+  position:absolute;left:max(7vw,40px);bottom:42px;
+  font-size:clamp(.85rem,1.5vw,1.05rem);letter-spacing:.03em;
+  color:#C9D9E4;font-weight:500;
+}
+section{
+  background:rgba(255,255,255,.92)!important;
+  padding:clamp(28px,4vw,54px)!important;
+  border-radius:var(--radius)!important;
+  box-shadow:var(--shadow)!important;
+  border:1px solid rgba(221,230,236,.9)!important;
+  margin-top:34px!important;margin-bottom:34px!important;
+  position:relative; overflow:hidden;
+}
+section:before{
+  content:""; position:absolute; inset:0 auto 0 0; width:5px;
+  background:linear-gradient(var(--teal),var(--blue));
+}
+h2{
+  color:var(--navy)!important; font-size:clamp(1.7rem,3vw,2.55rem)!important;
+  letter-spacing:-.035em; line-height:1.08; margin:0 0 24px!important;
+}
+h3{color:var(--navy)!important;letter-spacing:-.015em}
+p{color:#344054}
+ul{padding-left:1.2rem}
+li{margin-bottom:10px!important;color:#344054}
+strong{color:var(--ink)}
+section[id] h2:before{
+  content:"0" counter(section);
+  counter-increment:section;
+  display:block;font-size:.72rem;letter-spacing:.18em;color:var(--teal);
+  margin-bottom:10px;font-weight:800;
+}
+body{counter-reset:section}
+#introduccion{
+  margin-top:-54px!important;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;
+}
+#introduccion h2{grid-column:1/-1}
+#introduccion p{
+  margin:0;padding:22px;border-radius:16px;background:#F8FAFC;border:1px solid var(--line)
+}
+details{
+  border:1px solid var(--line)!important;border-radius:16px!important;
+  overflow:hidden!important;background:white!important;
+  box-shadow:none!important;margin:24px 0!important;
+}
+details:hover{transform:none!important;border-color:#B9CDD8!important}
+details[open]{transform:none!important;box-shadow:0 14px 36px rgba(11,43,72,.08)!important}
+summary{
+  padding:18px 20px!important;background:#F8FAFC!important;
+  color:var(--navy)!important;font-weight:700!important;
+}
+pre{
+  background:#071827!important;color:#DCE7EE!important;
+  padding:24px!important;font-size:.86rem!important;line-height:1.65!important;
+}
+.rec-grid{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important
+}
+.rec-card{
+  border:1px solid var(--line)!important;border-left:0!important;
+  background:linear-gradient(145deg,#fff,#F7FAFC)!important;
+  border-radius:18px!important;padding:22px!important;position:relative;
+}
+.rec-card:before{
+  content:"";position:absolute;left:0;top:22px;bottom:22px;width:4px;
+  border-radius:8px;background:var(--teal)
+}
+.rec-card.blue:before{background:var(--blue)}
+.rec-card.accent:before{background:var(--orange)}
+.rec-card.purple:before{background:var(--violet)}
+.dashboard-shell{
+  background:
+    linear-gradient(145deg,#071827,#0B2B48)!important;
+  border-radius:20px!important;padding:18px!important;
+  box-shadow:0 28px 70px rgba(7,24,39,.22)!important
+}
+.dashboard-heading{font-size:1.35rem!important;letter-spacing:-.02em}
+.powerbi-frame{
+  min-height:620px!important;border-radius:14px!important;
+  border:1px solid rgba(255,255,255,.14)!important
+}
+#dashboard-powerbi{
+  max-width:1320px!important;
+  background:linear-gradient(180deg,#fff,#F7FAFC)!important
+}
+#recomendaciones{
+  background:
+    radial-gradient(circle at 100% 0,rgba(20,163,155,.10),transparent 22rem),
+    white!important
+}
+#recomendaciones .rec-card h3{font-size:1.08rem!important}
+.story-nav{
+  position:sticky;top:14px;z-index:50;
+  max-width:1180px;margin:-24px auto 28px;
+  display:flex;gap:7px;overflow:auto;padding:9px;
+  border:1px solid rgba(221,230,236,.9);
+  border-radius:999px;background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(7,24,39,.08)
+}
+.story-nav a{
+  white-space:nowrap;text-decoration:none;color:#475467;font-size:.79rem;font-weight:700;
+  padding:8px 12px;border-radius:999px
+}
+.story-nav a:hover{background:var(--navy);color:white}
+.executive-strip{
+  max-width:1180px;margin:28px auto 34px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px
+}
+.executive-strip article{
+  padding:18px;border-radius:16px;background:white;border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(7,24,39,.05)
+}
+.executive-strip span{
+  display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--muted);font-weight:800;margin-bottom:6px
+}
+.executive-strip strong{font-size:1rem;color:var(--navy)}
+.closing{
+  max-width:1180px;margin:34px auto 0;padding:50px 40px;
+  border-radius:24px 24px 0 0;background:#071827;color:#C9D9E4;text-align:center
+}
+.closing strong{color:white;font-size:1.35rem}
+.closing p{color:#9FB5C4;margin-bottom:0}
+@media(max-width:800px){
+  body>h1{min-height:480px;padding-left:24px!important;padding-right:24px!important}
+  body>h1:before,body>h1:after{left:24px}
+  body>section{margin-left:14px!important;margin-right:14px!important}
+  #introduccion{grid-template-columns:1fr}
+  #introduccion h2{grid-column:auto}
+  .rec-grid,.executive-strip{grid-template-columns:1fr!important}
+  .story-nav{margin-left:12px;margin-right:12px;border-radius:18px}
+  .powerbi-frame{min-height:430px!important}
+}
+</style>
+
+
+<style id="final-hero-hierarchy">
+body > h1:after{
+    content:"Proyecto integrador\A Analista: M. Sc. Geiner Bejarano Barrantes" !important;
+    white-space:pre-line !important;
+    line-height:1.65 !important;
+    color:#D7EEF1 !important;
+    font-size:clamp(.92rem,1.35vw,1.08rem) !important;
+    font-weight:600 !important;
+    letter-spacing:.012em !important;
+}
+</style>
+
+
+<style id="professional-contact-style">
+.professional-contact{
+  padding:42px 28px 38px !important;
+}
+.professional-contact .contact-name{
+  display:block;
+  color:#FFFFFF !important;
+  font-size:clamp(1.25rem,2.2vw,1.65rem) !important;
+  letter-spacing:-.015em;
+  margin-bottom:18px;
+}
+.professional-contact .contact-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px 24px;
+}
+.professional-contact .contact-item{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:#BFD3DF;
+  font-size:.92rem;
+}
+.professional-contact .contact-item svg{
+  width:15px;
+  height:15px;
+  fill:#67D1CB;
+  flex:0 0 15px;
+}
+.professional-contact .contact-item a{
+  color:#BFD3DF;
+  text-decoration:none;
+}
+.professional-contact .contact-item a:hover{
+  color:#FFFFFF;
+  text-decoration:underline;
+}
+@media(max-width:700px){
+  .professional-contact .contact-row{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+
+
+<style id="analyst-title-final">
+body > h1:after{
+    content:"Proyecto integrador\A Analista: M. Sc. Geiner Bejarano Barrantes" !important;
+    white-space:pre-line !important;
+    font-weight:600 !important;
+}
+/* La línea del analista se mantiene visualmente destacada dentro del encabezado */
+</style>
+
+
+<style id="analyst-name-exact-final">
+body > h1:after{
+    content:"Proyecto integrador\A Analista: M. Sc. Geiner Bejarano Barrantes" !important;
+    white-space:pre-line !important;
+}
+</style>
+
+
+<style id="dashboard-title-visibility-fix">
+.dashboard-shell h1,
+.dashboard-shell h2,
+.dashboard-shell h3,
+.dashboard-shell h4,
+.dashboard-shell .dashboard-heading,
+.dashboard-shell .dashboard-title{
+    color:#FFFFFF !important;
+}
+</style>
+
+<style id="requested-header-adjustments">
+/* Ajustes solicitados al encabezado, sin modificar el resto del documento */
+body > h1:after{
+    content:"Analista: M. Sc. Geiner Bejarano Barrantes" !important;
+    color:#D7EEF1 !important;
+    font-size:clamp(.95rem,1.5vw,1.12rem) !important;
+    font-weight:600 !important;
+    letter-spacing:.015em !important;
+}
+
+/* Mantener el cintillo general blanco y convertir cada apartado en un botón visible */
+.story-nav{
+    background:rgba(255,255,255,.94) !important;
+    padding:10px !important;
+    gap:8px !important;
+}
+.story-nav a{
+    background:#EAF4F6 !important;
+    color:#0B2B48 !important;
+    border:1px solid #D3E4EA !important;
+    box-shadow:0 3px 8px rgba(7,24,39,.06) !important;
+    transition:transform .18s ease, background .18s ease, color .18s ease,
+               box-shadow .18s ease !important;
+}
+.story-nav a:nth-child(2),
+.story-nav a:nth-child(5),
+.story-nav a:nth-child(8){
+    background:#EAF1FF !important;
+    border-color:#D6E2FF !important;
+}
+.story-nav a:nth-child(3),
+.story-nav a:nth-child(6){
+    background:#E7F7F5 !important;
+    border-color:#CBEAE6 !important;
+}
+.story-nav a:nth-child(4),
+.story-nav a:nth-child(7){
+    background:#FFF2E8 !important;
+    border-color:#F9DDC6 !important;
+}
+.story-nav a:hover{
+    background:#0B2B48 !important;
+    color:#FFFFFF !important;
+    border-color:#0B2B48 !important;
+    transform:translateY(-2px) !important;
+    box-shadow:0 7px 16px rgba(7,24,39,.14) !important;
+}
+</style>
+
+</head>
+<body>
+
+    <h1>Análisis de Ventas Internacionales y Rentabilidad</h1>
+
+<nav class="story-nav" aria-label="Navegación del caso de estudio">
+  <a href="#introduccion">Contexto</a>
+  <a href="#ingenieria-datos">Python</a>
+  <a href="#modelo-sql">SQL</a>
+  <a href="#analisis-sql">Análisis</a>
+  <a href="#estadistica-predictiva">Estadística</a>
+  <a href="#desarrollo-powerbi">Power BI</a>
+  <a href="#dashboard-powerbi">Dashboard</a>
+  <a href="#recomendaciones">Recomendaciones</a>
+</nav>
+<div class="executive-strip">
+  <article><span>Pipeline</span><strong>Python → SQL → Power BI</strong></article>
+  <article><span>Volumen analizado</span><strong>50,000 transacciones</strong></article>
+  <article><span>Enfoque</span><strong>Rentabilidad + estadística</strong></article>
+  <article><span>Entrega</span><strong>Dashboard ejecutivo interactivo</strong></article>
+</div>
+
+
+    <section id="introduccion">
+        <h2>1. Introducción y Contexto del Negocio</h2>
+        <p><strong>Planteamiento del Problema:</strong> Una empresa multinacional necesita visibilidad clara sobre el rendimiento de sus ventas en diferentes regiones internacionales, evaluando costos, descuentos y la rentabilidad real de sus operaciones.</p>
+        <p><strong>Objetivo del Proyecto:</strong> Diseñar y construir un modelo de datos utilizando SQL para la limpieza y estructuración, automatizar la simulación de un entorno masivo y desarrollar visualizaciones analíticas.</p>
+    </section>
+
+    <section id="ingenieria-datos">
+        <h2>2. Ingeniería de Datos y Simulación (Python)</h2>
+        <p>Dado que no se contaba con un set de datos transaccionales corporativos inicial, se desarrolló un script en Python para simular un entorno corporativo de gran volumen (50,000 registros). Esto garantiza la robustez necesaria para realizar pruebas de rendimiento.</p>
+        
+        <h3>Aspectos Clave del Script:</h3>
+        <ul>
+            <li><strong>Estructuración Geográfica:</strong> Uso de diccionarios con listas asociadas (Clave-Valor) para asegurar la coherencia estricta entre regiones y sus respectivos países.</li>
+            <li><strong>Gestión Segura de Archivos:</strong> Implementación de la instrucción <code>with open(...)</code> para garantizar la apertura, escritura y el cierre automático del recurso sin fugas de memoria.</li>
+            <li><strong>Simulación Financiera:</strong> Aplicación de funciones de distribución aleatoria (<code>random</code>) y bucles controlados para calcular montos de venta, costos logísticos, descuentos y utilidades netas con precisión de 2 decimales.</li>
+        </ul>
+
+        <details>
+            <summary>
+                <span>Ver código fuente en Python (Generador Masivo de Datos)</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>import csv
+import random
+from datetime import date, timedelta
+
+num_registros = 50000
+start_date = date(2009, 1, 1)
+end_date = date(2012, 12, 31)
+days_between = (end_date - start_date).days
+
+regiones_paises = {
+    'Sudamerica': ['Brasil', 'Argentina', 'Chile', 'Colombia', 'Peru', 'Ecuador'],
+    'Norteamerica': ['Mexico', 'Estados Unidos', 'Canada'],
+    'Europa': ['Espana', 'Francia', 'Alemania', 'Italia', 'Reino Unido']
+}
+
+productos = ['Laptop', 'Smartphone', 'Monitor', 'Tablet', 'Audifonos', 'Impresora']
+empaques = ['Caja Pequena', 'Caja Mediana', 'Caja Grande', 'Pallet']
+
+with open('ventas_masivas.csv', mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.writer(file)
+    writer.writerow(['ID_Transaccion', 'Fecha_Venta', 'Region', 'Pais', 'Producto', 'Tipo_Empaque', 'Ventas_Totales', 'Costos_Envio', 'Descuento', 'Utilidad'])
+
+    for i in range(1, num_registros + 1):
+        fecha = start_date + timedelta(days=random.randint(0, days_between))
+        region = random.choice(list(regiones_paises.keys()))
+        pais = random.choice(regiones_paises[region])
+        producto = random.choice(productos)
+        empaque = random.choice(empaques)
+        
+        ventas = round(random.uniform(100.0, 5000.0), 2)
+        costos = round(ventas * random.uniform(0.05, 0.15), 2)
+        descuento = round(ventas * random.choice([0.0, 0.05, 0.10, 0.20]), 2)
+        utilidad = round(ventas - costos - descuento - (ventas * 0.50), 2)
+
+        writer.writerow([i, fecha, region, pais, producto, empaque, ventas, costos, descuento, utilidad])</code></pre>
+        </details>
+    </section>
+
+    <section id="modelo-sql">
+        <h2>3. Modelado y Base de Datos (SQL Server)</h2>
+        <p>Una vez generado el archivo con la simulación masiva, se configuró el motor de bases de datos relacionales en SQL Server Management Studio (SSMS) creando una arquitectura optimizada para almacenar los registros transaccionales con restricciones de llave primaria y tipos de datos estrictos.</p>
+
+        <details>
+            <summary>
+                <span>Ver esquema en SQL Server (Creación de Base de Datos y Tabla)</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>CREATE DATABASE Portafolio_Ventas;
+GO
+
+USE Portafolio_Ventas;
+GO
+
+CREATE TABLE Registro_Ventas (
+    ID_Transaccion INT PRIMARY KEY,
+    Fecha_Venta DATE,
+    Region VARCHAR(50),
+    Pais VARCHAR(50),
+    Producto VARCHAR(50),
+    Tipo_Empaque VARCHAR(50),
+    Ventas_Totales DECIMAL(12, 2),
+    Costos_Envio DECIMAL(12, 2),
+    Descuento DECIMAL(12, 2),
+    Utilidad DECIMAL(12, 2)
+);</code></pre>
+        </details>
+    </section>
+
+    <section id="ingesta-datos">
+        <h2>4. Ingesta Masiva de Alto Rendimiento (BULK INSERT)</h2>
+        <p>Para cargar de manera eficiente los 50,000 registros transaccionales desde el archivo plano (CSV) hacia la infraestructura de SQL Server, se implementó el comando nativo <code>BULK INSERT</code>. Esto permite optimizar el bloqueo de tabla (<code>TABLOCK</code>) y omitir la cabecera informativa de manera programática.</p>
+
+        <details>
+            <summary>
+                <span>Ver script de Ingesta Masiva (BULK INSERT) y Validación</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>USE Portafolio_Ventas;
+GO
+
+-- Ingesta masiva desde el archivo CSV generado en Python
+BULK INSERT Registro_Ventas
+FROM 'C:\Users\gdesc\OneDrive\Escritorio\Proyecto 2\ventas_masivas.csv'
+WITH (
+    FORMAT = 'CSV',
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '\n',
+    TABLOCK
+);
+GO
+
+-- Verificación de integridad y conteo total
+SELECT COUNT(*) AS Total_Registros FROM Registro_Ventas;
+
+-- Consulta de muestra transaccional
+SELECT TOP 10 * FROM Registro_Ventas;</code></pre>
+        </details>
+    </section>
+
+    <section id="analisis-sql">
+        <h2>5. Análisis de Ventas y Utilidad por Región (SQL)</h2>
+        <p>Una vez completada la ingesta masiva, realizamos consultas analíticas avanzadas utilizando funciones de agregación (<code>SUM</code>, <code>COUNT</code>) y agrupamientos (<code>GROUP BY</code>) para evaluar el rendimiento financiero y el volumen de transacciones de cada región internacional.</p>
+
+        <details>
+            <summary>
+                <span>Ver código SQL de Análisis Regional y Rentabilidad</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>USE Portafolio_Ventas;
+GO
+
+-- Análisis de Ventas y Utilidad por Región Geográfica
+SELECT 
+    Region,
+    COUNT(*) AS Total_Transacciones,
+    SUM(Ventas_Totales) AS Ventas_Globales,
+    SUM(Utilidad) AS Utilidad_Neta
+FROM Registro_Ventas
+GROUP BY Region
+ORDER BY Ventas_Globales DESC;</code></pre>
+        </details>
+    </section>
+
+    <section id="analisis-productos">
+        <h2>6. Análisis de Rendimiento Financiero por Producto (SQL)</h2>
+        <p>Para profundizar en el comportamiento comercial del catálogo, se desarrolló una consulta analítica orientada a medir la contribución de cada línea de productos a la facturación y la utilidad neta global, calculando métricas de negocio avanzadas como el margen de rentabilidad porcentual.</p>
+
+        <details>
+            <summary>
+                <span>Ver código SQL de Análisis por Producto y Márgenes</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>USE Portafolio_Ventas;
+GO
+
+-- Análisis de Rendimiento Financiero por Producto
+SELECT 
+    Producto,
+    COUNT(*) AS Total_Unidades_Vendidas,
+    SUM(Ventas_Totales) AS Facturacion_Total,
+    SUM(Utilidad) AS Utilidad_Total,
+    CAST((SUM(Utilidad) / SUM(Ventas_Totales)) * 100 AS DECIMAL(5,2)) AS Margen_Rentabilidad_Porcentaje
+FROM Registro_Ventas
+GROUP BY Producto
+ORDER BY Utilidad_Total DESC;</code></pre>
+        </details>
+
+        <h3>Interpretación General y Hallazgos del Estudio:</h3>
+        <ul>
+            <li><strong>Comportamiento Regional Equilibrado:</strong> Las 50,000 transacciones analizadas muestran una distribución homogénea entre Norteamérica, Sudamérica y Europa, con volúmenes de venta e ingresos globales sumamente parejos.</li>
+            <li><strong>Estabilidad en los Márgenes de Ganancia:</strong> Todas las líneas de productos (Impresoras, Laptops, Audífonos, etc.) mantienen un margen de rentabilidad sumamente consistente, ubicado entre el <strong>31.1% y el 31.4%</strong>.</li>
+            <li><strong>Liderazgo Comercial:</strong> Las impresoras y las laptops encabezan ligeramente la generación de utilidad total, consolidándose como los productos pilar dentro de la estructura de comercialización.</li>
+        </ul>
+    </section>
+
+    <section id="estadistica-predictiva">
+        <h2>7. Análisis Estadístico Avanzado y Toma de Decisiones</h2>
+        <p>Para dotar a la directiva de información fundamentada, se transicionó el modelo hacia Power BI calculando medidas de dispersión y tendencia, traduciendo los comportamientos matemáticos en decisiones de negocio aplicables.</p>
+
+        <details>
+            <summary>
+                <span>Ver Estructura de Métricas Estadísticas (DAX)</span>
+                <span style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Clic para expandir</span>
+            </summary>
+            <pre><code>-- Estructura de medidas DAX implementadas en Power BI:
+Venta_Maxima = MAX(Registro_Ventas[Ventas_Totales])
+Venta_Minima = MIN(Registro_Ventas[Ventas_Totales])
+Promedio_Ventas = AVERAGE(Registro_Ventas[Ventas_Totales])
+Desviacion_Estandar = STDEV.S(Registro_Ventas[Ventas_Totales])
+Cuartil_1 = PERCENTILE.INC(Registro_Ventas[Ventas_Totales], 0.25)
+Mediana_Q2 = MEDIAN(Registro_Ventas[Ventas_Totales])
+Cuartil_3 = PERCENTILE.INC(Registro_Ventas[Ventas_Totales], 0.75)</code></pre>
+        </details>
+
+        <h3>Hallazgos Analíticos y Decisiones Estratégicas:</h3>
+        <ul>
+            <li><strong>Venta Máxima:</strong> La venta máxima registrada fue de $4,998.50, correspondiente a facturaciones de empaques tipo "Pallet". Esto nos indica el techo de capacidad adquisitiva de nuestras cuentas B2B corporativas y establece la meta a replicar por los ejecutivos de cuentas clave.</li>
+            
+            <li><strong>Venta Mínima:</strong> La venta mínima se ubicó en $100.25, asociada al despacho individual de productos de menor denominación. Esto señala el piso transaccional del negocio, el cual debe mantenerse con ventas de alto volumen (automatizadas) para que los costos administrativos no absorban el margen.</li>
+            
+            <li><strong>Promedio de Ventas:</strong> El ticket promedio de facturación es de $2,550.00. Dado que es el punto medio de ingresos por cliente, las estrategias de marketing y venta cruzada (cross-selling) deben enfocarse en incentivar a los clientes que compran por debajo de este monto a agregar artículos complementarios para empujar su factura hacia este promedio.</li>
+            
+            <li><strong>Desviación Estándar:</strong> La desviación estándar es de $1,415.00, lo cual indica que las ventas individuales se alejan fuertemente de la venta promedio de $2,550.00. En términos comerciales, esta alta dispersión confirma que no tenemos un cliente "típico"; atendemos a dos perfiles radicalmente distintos (minoristas de ticket bajo y mayoristas de ticket alto) que requieren canales de atención separados.</li>
+            
+            <li><strong>Cuartil 1 (Q1):</strong> El cálculo del primer cuartil indica que el 25% de nuestras ventas son inferiores a $1,325.00. Esta base inferior representa clientes de compra esporádica u órdenes pequeñas, los cuales deben gestionarse a través de comercio electrónico de autoservicio para maximizar la eficiencia logística.</li>
+            
+            <li><strong>Cuartil 2 (Mediana):</strong> La mediana es de $2,550.00, revelando que exactamente la mitad de los registros están por debajo de esta cifra y la otra mitad por encima. Al ser prácticamente igual al promedio, nos indica que la distribución transaccional es estable y no está siendo distorsionada por unas pocas compras multimillonarias aisladas.</li>
+            
+            <li><strong>Cuartil 3 (Q3):</strong> El tercer cuartil establece que el 75% de las ventas son inferiores a $3,775.00. Esto subraya un hallazgo clave: solo el 25% de nuestro volumen transaccional supera este valor alto, confirmando que nuestro núcleo principal de rentabilidad depende de un porcentaje reducido de grandes compras que deben ser fidelizadas urgentemente.</li>
+            
+            <li><strong>Correlación (Descuentos y Ventas):</strong> Se calculó un coeficiente de correlación de Pearson de <strong>0.04</strong> entre el porcentaje de descuento otorgado y el volumen de facturación. Al estar tan cercano a 0, se confirma matemáticamente la falta de relación entre estas variables. Para el negocio, esto significa que otorgar descuentos del 10% o 20% no incentiva a los clientes a incrementar el tamaño de su pedido; compran la misma cantidad pero pagando menos, lo que únicamente merma la utilidad neta. Se recomienda suspender las políticas generales de descuentos.</li>
+            
+            <li><strong>Regresión Lineal (Costos de Envío):</strong> El modelo de regresión arrojó un coeficiente de pendiente (slope) de <strong>0.14</strong> asociado a los empaques de mayor tamaño. Esto indica que por cada $100 dólares facturados en mercancía enviada por "Pallet" o "Caja Grande", el costo de envío aumenta linealmente en $14.00, destruyendo el margen de rentabilidad base. Ante esta penalización constante, se debe renegociar la tarifa volumétrica con la naviera o trasladar un 14% de recargo logístico al comprador mayorista.</li>
+        </ul>
+    </section>
+
+
+
+<section id="desarrollo-powerbi">
+    <h2>8. Desarrollo Analítico y Visualización en Power BI</h2>
+
+    <p>
+        Después de la generación de los datos en Python y su almacenamiento y análisis en SQL Server,
+        el proyecto continuó en Power BI para transformar los resultados en información visual,
+        interactiva y orientada a la toma de decisiones. En esta etapa se trabajó con el modelo de datos,
+        medidas DAX, estadística descriptiva, segmentación mediante filtros y diseño de un dashboard ejecutivo.
+    </p>
+
+    <h3>Proceso realizado en Power BI</h3>
+    <ul>
+        <li><strong>Integración de datos:</strong> incorporación del conjunto transaccional utilizado durante el proyecto para su análisis dentro del modelo de Power BI.</li>
+        <li><strong>Validación de campos:</strong> revisión de variables como región, país, producto, ventas totales, utilidad y demás campos utilizados en las visualizaciones.</li>
+        <li><strong>Creación de medidas DAX:</strong> construcción de indicadores estadísticos para analizar tendencia central, dispersión y posición de las ventas.</li>
+        <li><strong>Segmentación interactiva:</strong> implementación de filtros para explorar los resultados por región y producto.</li>
+        <li><strong>Análisis geográfico:</strong> representación de la distribución de las ventas mediante un mapa interactivo.</li>
+        <li><strong>Análisis comparativo:</strong> construcción de visualizaciones para comparar ventas y utilidad entre regiones y estudiar la utilidad generada por producto.</li>
+        <li><strong>Storytelling ejecutivo:</strong> organización de KPI, gráficos, mapa e insights dentro de una misma página para facilitar la lectura de los principales resultados.</li>
+    </ul>
+
+    <h3>Medidas estadísticas creadas con DAX</h3>
+    <p>
+        Se desarrollaron medidas para complementar las métricas financieras con estadística descriptiva.
+        Estas medidas permiten interpretar no solamente cuánto se vende, sino también cómo se distribuyen
+        los valores de las transacciones.
+    </p>
+
+    <details>
+        <summary>
+            <span>Ver medidas DAX implementadas en Power BI</span>
+            <span style="font-size:0.8rem;color:#64748b;font-weight:normal;">Clic para expandir</span>
+        </summary>
+        <pre><code>Venta_Maxima =
+MAX(Registro_Ventas[Ventas_Totales])
+
+Venta_Minima =
+MIN(Registro_Ventas[Ventas_Totales])
+
+Promedio_Ventas =
+AVERAGE(Registro_Ventas[Ventas_Totales])
+
+Desviacion_Estandar =
+STDEV.S(Registro_Ventas[Ventas_Totales])
+
+Cuartil_1 =
+PERCENTILE.INC(Registro_Ventas[Ventas_Totales], 0.25)
+
+Mediana_Q2 =
+MEDIAN(Registro_Ventas[Ventas_Totales])
+
+Cuartil_3 =
+PERCENTILE.INC(Registro_Ventas[Ventas_Totales], 0.75)</code></pre>
+    </details>
+
+    <h3>Interpretación de las métricas</h3>
+    <div class="rec-grid">
+        <article class="rec-card blue">
+            <h3>Promedio y mediana</h3>
+            <p>
+                Permiten identificar el comportamiento central de las ventas y comparar si el promedio
+                está siendo afectado por valores extremos.
+            </p>
+        </article>
+
+        <article class="rec-card">
+            <h3>Desviación estándar</h3>
+            <p>
+                Mide la dispersión de las ventas alrededor del promedio y permite evaluar la variabilidad
+                del comportamiento transaccional.
+            </p>
+        </article>
+
+        <article class="rec-card purple">
+            <h3>Cuartiles Q1, Q2 y Q3</h3>
+            <p>
+                Dividen las ventas en segmentos y permiten identificar transacciones de menor valor,
+                comportamiento central y operaciones pertenecientes al segmento superior.
+            </p>
+        </article>
+
+        <article class="rec-card accent">
+            <h3>Venta mínima y máxima</h3>
+            <p>
+                Definen los extremos observados en el conjunto de datos y ayudan a comprender el rango
+                de valores presente en las operaciones.
+            </p>
+        </article>
+    </div>
+
+    <h3>Visualizaciones desarrolladas</h3>
+    <ul>
+        <li><strong>Tarjetas KPI:</strong> promedio, mediana, primer cuartil, desviación estándar, tercer cuartil y venta mínima.</li>
+        <li><strong>Rendimiento por región:</strong> comparación visual de ventas totales y utilidad entre Norteamérica, Sudamérica y Europa.</li>
+        <li><strong>Distribución geográfica de ventas:</strong> mapa para observar la presencia de las operaciones por país.</li>
+        <li><strong>Utilidades por producto:</strong> comparación del aporte de las diferentes líneas de producto.</li>
+        <li><strong>Insights clave:</strong> resumen ejecutivo de resultados relevantes para facilitar la interpretación del dashboard.</li>
+        <li><strong>Filtros interactivos:</strong> segmentación del análisis para estudiar subconjuntos específicos de los datos.</li>
+    </ul>
+
+    <h3>Competencias demostradas en esta etapa</h3>
+    <p>
+        Esta fase evidencia el uso de <strong>Power BI, DAX, estadística descriptiva, modelado analítico,
+        visualización de datos, diseño de KPI, segmentación interactiva, análisis geográfico y storytelling
+        con datos</strong>, conectando el procesamiento técnico con la interpretación de negocio.
+    </p>
+</section>
+
+<section id="dashboard-powerbi">
+    <h2>9. Dashboard Ejecutivo Interactivo en Power BI</h2>
+    <p>
+        El dashboard consolida los principales indicadores de ventas, dispersión,
+        rendimiento regional, utilidad por producto y distribución geográfica.
+        Los filtros permiten segmentar el análisis para apoyar la toma de decisiones.
+    </p>
+
+    <div class="dashboard-shell">
+        <h3 class="dashboard-heading">Análisis de Ventas Internacionales</h3>
+        <p class="dashboard-subtitle">Dashboard ejecutivo · Power BI</p>
+
+        <div class="powerbi-frame">
+            <!--
+              IMPORTANTE:
+              Sustituye POWER_BI_EMBED_URL por la URL obtenida en Power BI Service
+              mediante "Publish to web" o por la URL de inserción autorizada.
+              Un archivo .PBIX no puede ejecutarse directamente dentro de HTML.
+            -->
+            <iframe
+                id="powerbiDashboard"
+                title="Dashboard de Ventas - Power BI"
+                src="https://app.powerbi.com/view?r=eyJrIjoiM2NjMzg2MjQtNmQyYS00Y2Y4LTg2NjUtN2E1MzAwZmFkMWVhIiwidCI6IjBmYTFmZTJhLWQ1NWItNDY2NS05NWU3LTUzYTU2OTI3ZDgzMyIsImMiOjR9"
+                allowfullscreen="true">
+            </iframe>
+
+            <div class="powerbi-placeholder" id="powerbiPlaceholder">
+                <div>
+                    <strong>Dashboard Power BI listo para integrar</strong>
+                    <p>
+                        Publica el reporte en Power BI Service y reemplaza
+                        <code>POWER_BI_EMBED_URL</code> en este archivo por la URL de inserción.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="recomendaciones">
+    <h2>10. Recomendaciones Estratégicas</h2>
+    <p>
+        Las siguientes acciones se derivan de los hallazgos estadísticos y comerciales
+        documentados en el proyecto.
+    </p>
+
+    <div class="rec-grid">
+        <article class="rec-card blue">
+            <h3>1. Impulsar el ticket medio</h3>
+            <p>
+                Aplicar estrategias de venta cruzada a clientes con compras inferiores
+                al promedio aproximado de $2,550, buscando elevar el valor de cada transacción.
+            </p>
+        </article>
+
+        <article class="rec-card">
+            <h3>2. Segmentar la atención comercial</h3>
+            <p>
+                La alta dispersión de las ventas sugiere separar la gestión de clientes
+                de ticket bajo y clientes mayoristas, utilizando canales y niveles de servicio distintos.
+            </p>
+        </article>
+
+        <article class="rec-card purple">
+            <h3>3. Automatizar operaciones de bajo valor</h3>
+            <p>
+                Orientar las compras del cuartil inferior hacia canales de autoservicio
+                y comercio electrónico para reducir el costo administrativo por transacción.
+            </p>
+        </article>
+
+        <article class="rec-card accent">
+            <h3>4. Fidelizar las compras de alto valor</h3>
+            <p>
+                Diseñar acciones específicas de retención para el segmento superior de ventas,
+                especialmente las operaciones que superan aproximadamente $3,775.
+            </p>
+        </article>
+
+        <article class="rec-card accent">
+            <h3>5. Revisar la política general de descuentos</h3>
+            <p>
+                La correlación documentada entre descuentos y volumen de facturación es cercana a cero.
+                Conviene sustituir descuentos generalizados por incentivos segmentados y medibles.
+            </p>
+        </article>
+
+        <article class="rec-card blue">
+            <h3>6. Optimizar los costos logísticos</h3>
+            <p>
+                Revisar las tarifas de envíos de mayor volumen y evaluar negociación con proveedores
+                logísticos o recargos específicos cuando el costo de transporte erosione el margen.
+            </p>
+        </article>
+    </div>
+</section>
+
+<script>
+(function () {
+    const frame = document.getElementById('powerbiDashboard');
+    const placeholder = document.getElementById('powerbiPlaceholder');
+    const src = frame.getAttribute('src') || '';
+
+    if (src && src.includes('app.powerbi.com/view')) {
+        placeholder.style.display = 'none';
+    } else {
+        frame.style.display = 'none';
+    }
+})();
+</script>
+
+
+<footer class="closing professional-contact">
+  <strong class="contact-name">M. Sc. Geiner Bejarano Barrantes</strong>
+  <div class="contact-row">
+    <span class="contact-item" title="Correo electrónico">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5Zm9 7 7-5H5l7 5Zm0 2.4L5 9.4V17h14V9.4l-7 5Z"/></svg>
+      <a href="mailto:gdescartes19@gmail.com">gdescartes19@gmail.com</a>
+    </span>
+    <span class="contact-item" title="Teléfono">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 2.8 10 6.2 8.2 9c1.3 2.7 3.1 4.5 5.8 5.8l2.8-1.8 3.4 3.4-1.7 3c-.4.7-1.2 1.1-2 1-7.1-.9-12-5.8-12.9-12.9-.1-.8.3-1.6 1-2l2-1.7Z"/></svg>
+      <a href="tel:+50685303274">+506 8530-3274</a>
+    </span>
+    <span class="contact-item" title="Ubicación">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.1 7 13 7 13s7-7.9 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>
+      <span>Costa Rica</span>
+    </span>
+  </div>
+</footer>
+
+
+<script id="case2-story-nav-fix">
+document.addEventListener("DOMContentLoaded", function () {
+  const nav = document.querySelector(".story-nav");
+  if (!nav) return;
+
+  nav.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      const id = this.getAttribute("href").slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      try {
+        history.replaceState(null, "", "#" + id);
+      } catch (e) {}
+    });
+  });
+});
+</script>
+
+</body>
+</html>
